@@ -13,7 +13,7 @@ function createUserStaticAdmin(req,res) {
     var  userModel = new User(); 
     userModel.user = 'ADMIN';
     userModel.password = 'deportes123';
-    userModel.rol = 'Administrador'
+    userModel.type = admin
  
     User.find({ $or: [
      {user: userModel.user}
