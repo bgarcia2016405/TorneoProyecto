@@ -41,10 +41,8 @@ export class UserService {
  }
 
 
- obtenerUsuarioId(token,id:String): Observable<any>{
-  let headers = this.headers.set('Authorization',token)
-
-  return this.http.get(this.url + '/showUserId/' + id, {headers: this.headers})
+ obtenerUsuarioId(id:String): Observable<any>{
+  return this.http.get(this.url + '/findUserId/' + id, {headers: this.headers})
  }
 
  editarUsuario(usuario: User): Observable<any>{
@@ -55,7 +53,7 @@ export class UserService {
 
  eliminarUsuario(id:String): Observable<any>{{
   let token = this.headers.set('Authorization', this.getToken())
-  return this.http.delete(this.url + '/dropUser', {headers: token})
+  return this.http.delete(this.url + '/dropUser/' + id, {headers: token})
  }}
 
  usuarioManager(): Observable<any>{
