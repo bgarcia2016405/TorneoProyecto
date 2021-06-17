@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   public userModel: User;
   public token;
   public identidad;
-
+  public usuarios;
 
   constructor(public userService:UserService,
     private router:Router) {
@@ -76,5 +76,34 @@ export class NavbarComponent implements OnInit {
 
   refresh(): void{
     window.location.reload();
+  }
+
+  eliminarUsuario(idUsuario){
+    this.userService.eliminarUsuario(idUsuario).subscribe(
+      response=>{
+        console.log(response);
+        localStorage.setItem('identidad', JSON.stringify(""))
+        this.refresh()
+        this.router.navigate(['/inicio']);
+      }
+    )
+  }
+/*
+  cerrarSesion(){
+    response=>{
+      console.log(response)
+      this.refresh()
+      localStorage.setItem('identidad', JSON.stringify(""))
+      this.router.navigate(['/inicio']);
+    }
+  }
+*/
+  obtenerUsuarioId(idUsuario){
+    this.userService.obtenerUsuarioId(idUsuario).subscribe(
+      response=>{
+        this.userModel = response;
+        console.log(response);
+      }
+    )
   }
 }

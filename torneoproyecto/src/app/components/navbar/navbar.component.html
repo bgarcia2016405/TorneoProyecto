@@ -7,9 +7,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!--
         <li class="nav-item">
           <a *ngIf="userService.getIdentidad().type==='Administrador'" style="color:black" class="nav-link" routerLink="/usuarios" routerLinkActive="active"><i class="bi bi-people-fill"></i> Usuarios</a>
         </li>
+        -->
       </ul>
     </div>
     <div class="dropstart">
@@ -29,7 +31,10 @@
           aria-controls="datosCanvas"><i class="bi bi-person-lines-fill"></i> Ver perfil</a>
         </li>
         <li class="nav-item">
-          <a  style="color:black" class="nav-link" class="nav-link"routerLink="/registro" ><i class="bi bi-person-plus-fill"></i> Registrarme</a>
+          <a  style="color:black" class="nav-link" class="nav-link"routerLink="/registro" ><i class="bi bi-person-plus-fill"></i> Registrar</a>
+        </li>
+        <li class="nav-item">
+          <a  *ngIf="userService.getIdentidad().type==='Administrador'" style="color:black"  class="nav-link" class="nav-link"routerLink="/usuarios" ><i class="bi bi-people-fill"></i> Ver usuarios</a>
         </li>
       </ul>
     </div>
@@ -113,5 +118,30 @@
   </div>
   <div class="offcanvas-footer">
     <img src="../../../assets/Top Tournament.png" style="max-width: 40%;" alt="...">
+    <div *ngIf="identidad.type==='Usuario'" class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-dark"><i class="bi bi-pencil-square"></i></button>
+      <button type="button" class="btn btn-dark" (click)="obtenerUsuarioId(identidad._id)"
+      data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario"><i class="bi bi-trash-fill"></i></button>
     </div>
+  </div>
+</div>
+
+<!-- Modal Eliminar Usuario -->
+<div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro de que desea eliminar el usuario, {{identidad.user }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square"></i> No, cerrar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+        (click)="eliminarUsuario(identidad._id)"><i class="bi bi-check-square"></i> Si, eliminar <i class="bi bi-trash"></i></button>
+      </div>
+    </div>
+  </div>
 </div>
