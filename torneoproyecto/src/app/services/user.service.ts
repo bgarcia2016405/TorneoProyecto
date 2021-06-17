@@ -51,6 +51,12 @@ export class UserService {
   return this.http.put(this.url + '/editUser', params, {headers: token} )
  }
 
+ editarUsuarioAdmin(usuario: User): Observable<any>{
+  let token = this.headers.set('Authorization', this.getToken())
+  let params = JSON.stringify(usuario);
+  return this.http.put(this.url + '/editUserAdmin/'+usuario._id,params, {headers: token} )
+ }
+
  eliminarUsuario(id:String): Observable<any>{{
   let token = this.headers.set('Authorization', this.getToken())
   return this.http.delete(this.url + '/dropUser/' + id, {headers: token})
