@@ -32,7 +32,7 @@
                     <i class="bi bi-pencil-square"></i></button>
                   <button  *ngIf="usua.type==='Usuario'"  type="button" class="btn-xs btn-secondary"
 
-                  data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario" (click)="obtenerUsuarioId(usua._id)">
+                  data-bs-toggle="modal" data-bs-target="#eliminarModal" (click)="obtenerUsuarioId(usua._id)">
                     <i class="bi bi-trash-fill"></i></button>
                   <button type="button" class="btn-xs btn-secondary"
                   (click)="obtenerUsuarioId(usua._id)"
@@ -95,19 +95,14 @@
 </div>
 
 <!-- Modal Eliminar Usuario -->
-<div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Hola</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="inputNombre" class="form-label">Nombre:</label>
-          <input type="text" class="form-control" id="inputNombre" name="nombre"
-          #nombre="ngModel" [(ngModel)]="idUsuarioModel.name" disabled>
-        </div>
         ¿Esta seguro de que desea eliminar el Usuario, {{idUsuarioModel.name}}?
       </div>
       <div class="modal-footer">
