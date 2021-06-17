@@ -102,9 +102,13 @@ function createUser(req,res){
 }
 
 function dropUser(req,res){
-    var user = req.user.sub;
-
-    userModel.findByIdAndDelete(user, (err,UserDrop)=>{
+    const idUsuario = req.params.idUsuario;
+    /*
+    if(req.user.type != 'Administrador'){
+        return res.status(500).send({ mensaje: 'You can not delete the user' })
+    }
+    */
+    userModel.findByIdAndDelete(idUsuario, (err,UserDrop)=>{
         if(err) return res.status(404).send({report:'Failed to delete user'});
         if(!UserDrop) return res.status(402).send({report:'User does not exist'});
             return res.status(200).send(UserDrop);

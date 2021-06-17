@@ -12,8 +12,10 @@ import { UserService } from "../../services/user.service";
 export class UsersComponent implements OnInit {
   public usuarios;
   public idUsuarioModel: User;
+  public idUser: User;
   constructor(public userService: UserService) {
     this.idUsuarioModel = new User("","","","","","","","");
+    this.idUser = new User("","","","","","","","");
    }
 
   ngOnInit(): void {
@@ -29,7 +31,22 @@ export class UsersComponent implements OnInit {
     )
   }
 
+  obtenerUsuarioId(idUsuario){
+    this.userService.obtenerUsuarioId(idUsuario).subscribe(
+      response=>{
+        this.idUsuarioModel = response;
+        console.log(response);
+      }
+    )
+  }
 
-
+  eliminarUsuario(idUsuario){
+     this.userService.eliminarUsuario(idUsuario).subscribe(
+      response=>{
+        console.log(response);
+        this.obtenerUsuarios();
+      }
+    )
+  }
 }
 
