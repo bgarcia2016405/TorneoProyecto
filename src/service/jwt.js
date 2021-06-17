@@ -14,3 +14,4 @@ exports.createToken = function (user){
     }
     return jwt.encode(payload,secret);
 }
+
