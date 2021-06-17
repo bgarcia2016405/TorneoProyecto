@@ -126,6 +126,17 @@ function editUser(req,res){
     }) 
 }
 
+function editUserAdmin (req,res){
+    var idUsuario = req.params.idUsuario;
+    var params = req.body;
+
+    userModel.findByIdAndUpdate(idUsuario,params, {new:true}, (err,userEdit)=>{
+        if(err) return res.status(404).send({report:"Error in edit user"});
+        if(!userEdit) return res.status(200).send({report:"User has not edit"});
+            return res.status(200).send(userEdit)
+    })
+}
+
 function findUserId(req,res){
     var idUsuario = req.params.idUsuario
 
@@ -154,6 +165,7 @@ module.exports = {
     createUser,
     dropUser,
     editUser,
+    editUserAdmin,
     findUserId,
     showAllUsers,
     createUserStaticAdmin
