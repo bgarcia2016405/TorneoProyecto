@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
     this.userService.obtenerUsuarioId(idUsuario).subscribe(
       response=>{
         this.idUsuarioModel = response;
-        console.log(response);
+        console.log(this.idUsuarioModel);
       }
     )
   }
@@ -44,6 +44,26 @@ export class UsersComponent implements OnInit {
      this.userService.eliminarUsuario(idUsuario).subscribe(
       response=>{
         console.log(response);
+        this.obtenerUsuarios();
+      }
+    )
+  }
+
+
+  editarUsuario(){
+    this.userService.editarUsuario(this.idUsuarioModel).subscribe(
+      response=>{
+        console.log(response)
+        this.obtenerUsuarios();
+      }
+    )
+  }
+
+
+  editarUsuarioAdmin(){
+    this.userService.editarUsuarioAdmin(this.idUsuarioModel).subscribe(
+      response=>{
+        console.log(response)
         this.obtenerUsuarios();
       }
     )
