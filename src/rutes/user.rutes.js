@@ -15,6 +15,7 @@ var api = express.Router();
     api.post('/createUser', userController.createUser);
     api.delete('/dropUser/:idUsuario', authenticated.ensureAuth, userController.dropUser);
     api.put('/editUser', authenticated.ensureAuth, userController.editUser);
+    api.put('/editUserAdmin/:idUsuario', authenticated.ensureAuth, userController.editUserAdmin);
     api.get('/findUserId/:idUsuario', userController.findUserId)
     api.get('/showAllUser', authenticated.ensureAuth, userController.showAllUsers)
 
