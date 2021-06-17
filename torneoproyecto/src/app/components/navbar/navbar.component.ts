@@ -106,4 +106,14 @@ export class NavbarComponent implements OnInit {
       }
     )
   }
+
+  editarUsuario(){
+    this.userService.editarUsuario(this.userModel).subscribe(
+      response=>{
+        console.log(response)
+        this.identidad = response
+        localStorage.setItem('identidad', JSON.stringify(this.identidad))
+      }
+    )
+  }
 }
