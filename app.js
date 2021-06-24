@@ -9,6 +9,7 @@ const cors = require("cors")
 // IMPORTACION RUTAS
 const user_controller = require("./src/controllers/user.controller");
 const user_rutes = require("./src/rutes/user.rutes");
+const tournament_routes = require("./src/rutes/tournament.rutes");
 
 // MIDDLEWARES
 app.use(bodyParser.urlencoded({ extended: false}))
@@ -18,7 +19,7 @@ app.use(bodyParser.json())
 app.use(cors());
 
 // CARGA DE RUTAS
-app.use('/api', user_rutes);
+app.use('/api', user_rutes, tournament_routes);
 
 
 user_controller.createUserStaticAdmin();

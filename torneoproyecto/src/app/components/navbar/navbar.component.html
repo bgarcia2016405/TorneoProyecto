@@ -18,7 +18,7 @@
       <button class="btn btn-outline-light dropdown-toggle"
         style="color:black" type="button" id="dropdownMenuButton1"
           data-bs-toggle="dropdown" aria-expanded="false">
-     {{identidad.user}}
+      <ng-container *ngIf="userService.getIdentidad() != null">{{identidad.user}}</ng-container>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li class="nav-item">
@@ -34,7 +34,7 @@
           <a  style="color:black" class="nav-link" class="nav-link"routerLink="/registro" ><i class="bi bi-person-plus-fill"></i> Registrar</a>
         </li>
         <li class="nav-item">
-          <a  *ngIf="userService.getIdentidad().type==='Administrador'" style="color:black"  class="nav-link" class="nav-link"routerLink="/usuarios" ><i class="bi bi-people-fill"></i> Ver usuarios</a>
+          <a  *ngIf="userService.getIdentidad() != null && userService.getIdentidad().type==='Administrador'" style="color:black"  class="nav-link" class="nav-link"routerLink="/usuarios" ><i class="bi bi-people-fill"></i> Ver usuarios</a>
         </li>
       </ul>
     </div>
@@ -87,7 +87,7 @@
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Perfil</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
+  <div class="offcanvas-body" *ngIf="userService.getIdentidad()">
     <form>
       <div class="mb-3">
         <label for="inputNombre" class="form-label">Nombre:</label>
@@ -122,7 +122,7 @@
   </div>
   <div class="offcanvas-footer">
     <img src="../../../assets/Top Tournament.png" style="max-width: 40%;" alt="...">
-    <div *ngIf="identidad.type==='Usuario'" class="btn-group" role="group" aria-label="Basic example">
+    <div *ngIf="userService.getIdentidad() != null && identidad.type==='Usuario'" class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-dark" (click)="obtenerUsuarioId(identidad._id)"
       data-bs-toggle="modal" data-bs-target="#editarUsuarioMd"><i class="bi bi-pencil-square"></i></button>
       <button type="button" class="btn btn-dark" (click)="obtenerUsuarioId(identidad._id)"
@@ -139,7 +139,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="userService.getIdentidad() != null">
         ¿Esta seguro de que desea eliminar el usuario, {{identidad.user }}?
       </div>
       <div class="modal-footer">
@@ -159,7 +159,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="userService.getIdentidad() != null">
         <form>
           <div class="mb-3">
             <label for="inputNombre" class="form-label">Nombre:</label>
