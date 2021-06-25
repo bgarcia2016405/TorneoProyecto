@@ -4,6 +4,9 @@ var Tournament = require('../models/tournament.model');
 const jwt = require('../service/jwt');
 const bcrypt = require("bcrypt-nodejs");
 
+const user = 'Usuario';
+const admin = 'Administrador';
+
 ////////////////////////Selman//////////////////////////////////////////
 
 ////////////////////////Angel//////////////////////////////////////////
@@ -42,11 +45,19 @@ function createTournament(req, res) {
 
 function getTournaments(req, res) {
     //Encuesta.find({ titulo: { $regex: 'encuesta', $options: 'i' } }, { listaComentarios: 0})
-    Tournament.find({ user: req.user.sub }, (err, tournamentsFound) => {
+    if(req.user.type === admin ){
+        Tournament.find((err,tournamentsFound)=>{
+            
+            return res.status(200).send({ tournamentsFound });
+        })
+    }else if(req.user.type === user){
+        Tournament.find({ user: req.user.sub }, (err, tournamentsFound) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion de torneos' });
         if (!tournamentsFound) return res.status(500).send({ mensaje: 'Error al obtener los torneos' });
         return res.status(200).send({ tournamentsFound });
     });
+    }
+    
 }
 
 function getTournamentId(req, res){

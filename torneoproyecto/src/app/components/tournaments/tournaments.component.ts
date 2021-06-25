@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class TournamentsComponent implements OnInit {
   public token;
+  public identidad
   public tournamentModelGet: Tournament;
   public tournamentModelGetId: Tournament;
   public tournamentModelCreate: Tournament;
@@ -18,21 +19,23 @@ export class TournamentsComponent implements OnInit {
   constructor(
     private _tournamentService: TournamentService,
     private _userService: UserService
-  ) { 
+  ) {
     this.token = this._userService.getToken();
     this.tournamentModelCreate = new Tournament('', '', '')
     this.tournamentModelGetId = new Tournament('', '', '')
+    this.identidad = this._userService.getIdentidad();
   }
 
   ngOnInit(): void {
     this.getTournaments();
+    console.log(this.identidad.type)
   }
 
   getTournaments() {
     this._tournamentService.getTournaments(this.token).subscribe(
       response => {
         this.tournamentModelGet = response.tournamentsFound;
-        console.log(response);
+        console.log(this.tournamentModelGet);
       },
       error => {
         console.log(<any>error);

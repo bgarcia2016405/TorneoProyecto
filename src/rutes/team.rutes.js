@@ -6,7 +6,7 @@ const teamController = require("../controllers/team.controller");
 
 var api = express.Router();
 
-
+api.post('/createTeam', authenticated.ensureAuth, teamController.crearrapido);
 
 
 module.exports = api;
