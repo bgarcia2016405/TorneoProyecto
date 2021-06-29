@@ -11,6 +11,7 @@ import { UsersComponent } from './components/users/users.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
+import { TeamsComponent } from './components/teams/teams.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { TournamentsComponent } from './components/tournaments/tournaments.compo
     UsersComponent,
     RegisterComponent,
     HomeComponent,
-    TournamentsComponent
+    TournamentsComponent,
+    TeamsComponent
   ],
   imports: [
     BrowserModule,
