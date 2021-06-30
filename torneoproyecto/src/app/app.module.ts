@@ -12,6 +12,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 import { TeamsComponent } from './components/teams/teams.component';
+import { MatchComponent } from './components/match/match.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TeamsComponent } from './components/teams/teams.component';
     RegisterComponent,
     HomeComponent,
     TournamentsComponent,
-    TeamsComponent
+    TeamsComponent,
+    MatchComponent
   ],
   imports: [
     BrowserModule,

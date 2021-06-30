@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 import { UsersComponent } from './components/users/users.component';
 import { TeamsComponent} from './components/teams/teams.component';
+import { MatchComponent } from './components/match/match.component';
 
 const routes: Routes = [
   { path: 'usuarios', component: UsersComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'tournaments', component: TournamentsComponent},
   { path: 'teams/:idTournament', component: TeamsComponent},
+  { path: 'match/:idTournament', component: MatchComponent},
   { path: '**', component: HomeComponent }
 ];
 

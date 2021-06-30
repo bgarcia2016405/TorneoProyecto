@@ -7,11 +7,11 @@ const Teams = require('../models/team.model')
 const Match = require('../models/match.model') 
 
 function generateMatch(req,res){
-   
+   var idTournament = req.params.idTournament;
     
     var i = 0
     var team = []
-    Teams.find({tournament:"60d5025b6bbcfa19e4e096b1"},(err,teamsFound)=>{
+    Teams.find({tournament:idTournament},(err,teamsFound)=>{
         teamsFound.forEach(
             element =>{
                 
@@ -24,7 +24,7 @@ function generateMatch(req,res){
               if(index != alpha){
                   if(index < alpha){
                     var matchModel = new Match();
-                    matchModel.tournament = "60d5025b6bbcfa19e4e096b1"
+                    matchModel.tournament = idTournament
                     matchModel.team1 = team[index]
                     matchModel.team2 = team[alpha] 
                     matchModel.save((err,matchSaved) => {
@@ -42,10 +42,11 @@ function generateMatch(req,res){
 
 }
 
-function showMatch(){
-    Match.find({tournament:"60d5025b6bbcfa19e4e096b1"},(err,teamsShow)=>{
+function showMatch(req,res){
+    var idTournament = req.params.idTournament
+    Match.find({tournament:idTournament},(err,teamsShow)=>{
         return res.status(200).send(teamsShow)
-}) 
+}).populate('team1 team2')
 }
 
 function simulateMatch(req,res){

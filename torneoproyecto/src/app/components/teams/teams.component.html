@@ -5,8 +5,8 @@
                 <button class="btn btn-outline-danger agregar" type="button" data-bs-toggle="modal" data-bs-target="#AgregarEquipo">
                   <i class="bi bi-plus">  Agregar equipo</i>
               </button>
-                <button class="btn btn-outline-primary agregar" type="button">
-                <i class="bi bi-plus">  Agregar Marcador</i>
+                <button class="btn btn-outline-primary agregar" type="button" routerLink="/match/{{idTeamRuta}}">
+                <i class="bi bi-plus"> Partidos</i>
               </button>
                 <button class="btn btn-outline-danger agregar" type="button">
                 <i class="bi bi-plus">  Ver Tabla</i>
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-4" *ngFor="let teamE of teamModelE">
             <div class="card mb-3" style="width: 18rem;">
-                <img src={{teamE.picture}} class="card-img-top" alt="Logo">
+                <img  src={{teamE.picture}} class="card-img-top" alt="Logo">
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{teamE.name}}</li>
@@ -82,6 +82,7 @@
                     <div class="mb-3">
                         <label for="exampleNombre" class="form-label">Nombre</label>
                         <input type="nombre" class="form-control" id="exampleNombre" name="name" #name="ngModel" [(ngModel)]="teamModelB.name">
+
                     </div>
                     <div class="mb-3">
                         <label for="exampleFoto" class="form-label">URL de foto</label>
@@ -102,7 +103,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

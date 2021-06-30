@@ -1,6 +1,5 @@
 'use strict'
 
-var Team = require('../models/team.model')
 const jwt = require('../service/jwt');
 const bcrypt = require("bcrypt-nodejs");
 const Team = require('../models/team.model');
@@ -11,31 +10,6 @@ const Team = require('../models/team.model');
 ////////////////////////Angel//////////////////////////////////////////
 
 ////////////////////////Byron//////////////////////////////////////////
-
-function crearrapido(req,res){
-    var params = req.body;
-    var team = new Team();
-    if (params.name) {
-        team.tournament = "60d5025b6bbcfa19e4e096b1"
-        team.name = params.name
-        team.gamePlayed = 0
-        team.wins = 0
-        team.draws = 0
-        team.loses = 0
-        team.goalsFor = 0
-        team.goalsAgainst = 0
-        team.goalsDiference = 0
-        team.points = 0
-        team.save((err,teamSaved)=>{
-            return res.status(200).send( teamSaved );
-        })
-
-    } else {
-        res.status(500).send({ mensaje: 'Rellene los datos necesarios para crear el torneo' });
-    }
-}
-
-
 ////////////////////////Jona//////////////////////////////////////////
 
 function createTeam(req, res) {
@@ -46,14 +20,14 @@ function createTeam(req, res) {
     teamModel.tournament = idTournament;
     teamModel.name = params.name;
     teamModel.picture = params.picture;
-    teamModel.gamePlayed = params.gamePlayed;
-    teamModel.wins = params.wins;
-    teamModel.draws = params.draws;
-    teamModel.loses = params.loses;
-    teamModel.goalsFor = params.goalsFor;
-    teamModel.goalsAgainst = params.goalsAgainst;
-    teamModel.goalsDiference = params.goalsDiference;
-    teamModel.points = params.points;
+    teamModel.gamePlayed = 0;
+    teamModel.wins =0;
+    teamModel.draws = 0;
+    teamModel.loses = 0;
+    teamModel.goalsFor = 0;
+    teamModel.goalsAgainst = 0
+    teamModel.goalsDiference = 0;
+    teamModel.points = 0;
 
 
     Team.find({
