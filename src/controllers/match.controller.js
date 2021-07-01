@@ -8,6 +8,12 @@ const Match = require('../models/match.model')
 
 function generateMatch(req,res){
    var idTournament = req.params.idTournament;
+
+
+
+
+
+
     
     var i = 0
     var team = []

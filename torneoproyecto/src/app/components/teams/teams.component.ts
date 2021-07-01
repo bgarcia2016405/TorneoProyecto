@@ -25,10 +25,10 @@ export class TeamsComponent implements OnInit {
     public _activatedRoute: ActivatedRoute
   ) {
     this.token = this._userService.getToken();
-    this.teamModel = new Team('','','','','','','','','','','','')
-    this.teamModelB = new Team('','','','','','','','','','','','')
-    this.teamModelEd = new Team('','','','','','','','','','','','')
-    this.teamModelE = new Team('','','','','','','','','','','','')
+    this.teamModel = new Team("","","","",0,0,0,0,0,0,0,0)
+    this.teamModelB = new Team("","","","",0,0,0,0,0,0,0,0)
+    this.teamModelEd = new Team("","","","",0,0,0,0,0,0,0,0)
+    this.teamModelE = new Team("","","","",0,0,0,0,0,0,0,0)
    }
 
   ngOnInit(): void {

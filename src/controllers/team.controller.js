@@ -73,13 +73,12 @@ function createTeam(req, res) {
 
 function getTeams(req, res) {
     var idTournament = req.params.idTournament;
-
-    Team.find({ tournament: idTournament }).populate('tournament', 'name').exec((err, teamsFound) => {
+    Team.find({tournament: idTournament},(err,teamsFound)=>{
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion de los equipos del Torneo' });
         if (!teamsFound) return res.status(500).send({ mensaje: 'Error al obtener los equipos' });
         return res.status(200).send({ teamsFound });
-
-    })
+    }).populate('tournament', 'name').sort( { points: -1 } )
+    
 }
 
 function getTeamId(req, res) {
@@ -88,7 +87,7 @@ function getTeamId(req, res) {
     Team.findById(idTeam).populate('tournament', 'name').exec((err, teamFound) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion del equipo' });
         if (!teamFound) return res.status(500).send({ mensaje: 'Error al obtener el equipo' });
-        return res.status(200).send({ teamFound });
+        return res.status(200).send( teamFound );
     })
 
 }

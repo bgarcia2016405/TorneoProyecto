@@ -8,7 +8,8 @@ var MatchSchema = Schema({
     team1: {type: Schema.Types.ObjectId, ref:'Team'},
     team2: {type: Schema.Types.ObjectId, ref:'Team'},
     score1: Number,
-    score2: Number
+    score2: Number,
+    jornada: String
 });
 
 module.exports = mongoose.model('Match', MatchSchema);
