@@ -9,7 +9,7 @@ var MatchSchema = Schema({
     team2: {type: Schema.Types.ObjectId, ref:'Team'},
     score1: Number,
     score2: Number,
-    jornada: String
+    jornada: Number
 });
 
 module.exports = mongoose.model('Match', MatchSchema);

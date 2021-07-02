@@ -21,9 +21,21 @@
 
       <div class="col">
         <div  *ngFor="let mad of matchGet">
+          <td *ngIf="mad.jornada != null">
+            Jornada {{mad.jornada}}
+           </td>
             <table style="margin-right: auto;margin-left: auto;">
+              <td *ngIf="mad.jornada == null">
+                <select class="form-select" id="floatingSelect"   [(ngModel)]="jornada">
+                  <option *ngFor="let j of jornada" value="{{j}}">{{j}}</option>
+
+                </select>
+                  <button  class="btn btn-outline-warning" type="button" data-bs-toggle="modal" (click)="jornadAc(mad._id)">
+                   Jornada
+                 </button>
+              </td>
               <td>
-                <li style="border:0;" class="list-group-item">{{mad.team1.name}}</li>
+                <li style="border:0;" class="list-group-item">  {{mad.team1.name}}</li>
               </td>
                 <td>
                   <div style="text-align:center">
@@ -75,7 +87,7 @@
           <tbody >
 
               <tr *ngFor="let tm of teams" >
-              <td>{{tm.name}}</td>
+              <td><img src="{{tm.picture}}" style="width:15PX" alt="">  {{tm.name}}</td>
               <td>{{tm.gamePlayed}}</td>
               <td>{{tm.wins}}</td>
               <td>{{tm.draws}}</td>

@@ -35,6 +35,10 @@ export class MatchService {
     return this.http.get(this.url + '/simulationMatch/'+idMatch, {headers:token})
   }
 
+  jornada(idMatch, jornada): Observable<any>{
+    let token = this.headers.set('Authorization', this.getToken())
+    return this.http.get(this.url + '/jornada/' + idMatch+'/'+jornada, {headers:token})
+  }
 
 getToken(){
     var token2 = localStorage.token;

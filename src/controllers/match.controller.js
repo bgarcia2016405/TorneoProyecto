@@ -10,6 +10,7 @@ function generateMatch(req,res){
    var idTournament = req.params.idTournament;
 
 
+    
 
 
 
@@ -25,6 +26,8 @@ function generateMatch(req,res){
                 i = i + 1; 
             }
         )
+       
+        
       for (let index = 0; index < team.length - 1; index++) {
           for (let alpha = 1; alpha < team.length; alpha++) {
               if(index != alpha){
@@ -48,11 +51,20 @@ function generateMatch(req,res){
 
 }
 
+
+function jornada(req,res){
+    var idMatch = req.params.idMatch;
+    var jornada = req.params.jornada
+    Match.findByIdAndUpdate(idMatch,{jornada:jornada},(err,matchE)=>{
+        return res.status(200).send(matchE)
+    })
+}
+
 function showMatch(req,res){
     var idTournament = req.params.idTournament
     Match.find({tournament:idTournament},(err,teamsShow)=>{
         return res.status(200).send(teamsShow)
-}).populate('team1 team2')
+}).populate('team1 team2').sort( { jornada: 1 } )
 }
 
 function simulateMatch(req,res){
@@ -116,5 +128,6 @@ function simulateMatch(req,res){
 module.exports = {
     generateMatch,
     showMatch,
-    simulateMatch
+    simulateMatch,
+    jornada
 }

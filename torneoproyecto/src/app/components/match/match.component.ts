@@ -15,17 +15,22 @@ import { UserService } from 'src/app/services/user.service';
 export class MatchComponent implements OnInit {
   public token;
   public matchGet : Match;
+  public matchJornada : Match
   public idTournamentRuta: String;
   public teams ;
+  public jornada;
   constructor(
     private teamService: TeamService,
     private userService: UserService,
     private matchService: MatchService,
     public activatedRoute: ActivatedRoute
+
   ) {
     this.token = this.userService.getToken();
-    this.matchGet = new Match("","","","",0,0)
+    this.matchGet = new Match("","","","",0,0,0)
+    this.matchJornada = new Match("","","","",0,0,0)
     this.teams = new Team("","","","",0,0,0,0,0,0,0,0)
+
    }
 
   ngOnInit(): void {
@@ -67,9 +72,23 @@ export class MatchComponent implements OnInit {
     this.teamService.getTeams(this.token, this.idTournamentRuta).subscribe(
       response =>{
         this.teams = response.teamsFound
-        console.log(this.teams)
+        this.jornada = response.jornadas
+        console.log(response.jornadas)
       }
     )
+  }
+
+  jornadAc(idMatch){
+    this.matchService.jornada(idMatch,this.jornada).subscribe(
+      response=>{
+        console.log(response)
+        this.refresh()
+      }
+    )
+  }
+
+  refresh(): void{
+    window.location.reload();
   }
 
 }

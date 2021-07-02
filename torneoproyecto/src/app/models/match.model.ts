@@ -5,6 +5,7 @@ export class Match{
     public team1: String,
     public team2: String,
     public score1: number,
-    public score2: number
+    public score2: number,
+    public jornada: number
     ){}
 }
