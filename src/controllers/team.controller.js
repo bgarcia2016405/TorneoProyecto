@@ -10,7 +10,6 @@ const Team = require('../models/team.model');
 ////////////////////////Angel//////////////////////////////////////////
 
 ////////////////////////Byron//////////////////////////////////////////
-
 ////////////////////////Jona//////////////////////////////////////////
 
 function createTeam(req, res) {
@@ -21,14 +20,14 @@ function createTeam(req, res) {
     teamModel.tournament = idTournament;
     teamModel.name = params.name;
     teamModel.picture = params.picture;
-    teamModel.gamePlayed = params.gamePlayed;
-    teamModel.wins = params.wins;
-    teamModel.draws = params.draws;
-    teamModel.loses = params.loses;
-    teamModel.goalsFor = params.goalsFor;
-    teamModel.goalsAgainst = params.goalsAgainst;
-    teamModel.goalsDiference = params.goalsDiference;
-    teamModel.points = params.points;
+    teamModel.gamePlayed = 0;
+    teamModel.wins =0;
+    teamModel.draws = 0;
+    teamModel.loses = 0;
+    teamModel.goalsFor = 0;
+    teamModel.goalsAgainst = 0
+    teamModel.goalsDiference = 0;
+    teamModel.points = 0;
 
 
     Team.find({
@@ -74,13 +73,19 @@ function createTeam(req, res) {
 
 function getTeams(req, res) {
     var idTournament = req.params.idTournament;
+    var jornadas=[]
 
-    Team.find({ tournament: idTournament }).populate('tournament', 'name').exec((err, teamsFound) => {
+    Team.find({tournament: idTournament},(err,teamsFound)=>{
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion de los equipos del Torneo' });
         if (!teamsFound) return res.status(500).send({ mensaje: 'Error al obtener los equipos' });
-        return res.status(200).send({ teamsFound });
-
-    })
+        
+    for (let index = 0; index < teamsFound.length-1; index++) {
+       jornadas[index] = index + 1 
+        
+    }
+        return res.status(200).send({ teamsFound,jornadas });
+    }).populate('tournament', 'name').sort( { points: -1 } )
+    
 }
 
 function getTeamId(req, res) {
@@ -89,7 +94,7 @@ function getTeamId(req, res) {
     Team.findById(idTeam).populate('tournament', 'name').exec((err, teamFound) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion del equipo' });
         if (!teamFound) return res.status(500).send({ mensaje: 'Error al obtener el equipo' });
-        return res.status(200).send({ teamFound });
+        return res.status(200).send( {teamFound} );
     })
 
 }

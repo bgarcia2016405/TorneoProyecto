@@ -13,9 +13,9 @@ import { UserService } from 'src/app/services/user.service';
 export class TeamsComponent implements OnInit {
   public token;
   public teamModel: Team;
-  public teamModelB;
-  public teamModelEd;
-  public teamModelE;
+  public teamModelB: Team;
+  public teamModelEd: Team;
+  public teamModelE: Team;
   public idTeamRuta: string;
 
 
@@ -25,8 +25,10 @@ export class TeamsComponent implements OnInit {
     public _activatedRoute: ActivatedRoute
   ) {
     this.token = this._userService.getToken();
-    this.teamModel = new Team('','','','','','','','','','','','')
-
+    this.teamModel = new Team("","","","",0,0,0,0,0,0,0,0)
+    this.teamModelB = new Team("","","","",0,0,0,0,0,0,0,0)
+    this.teamModelEd = new Team("","","","",0,0,0,0,0,0,0,0)
+    this.teamModelE = new Team("","","","",0,0,0,0,0,0,0,0)
    }
 
   ngOnInit(): void {
