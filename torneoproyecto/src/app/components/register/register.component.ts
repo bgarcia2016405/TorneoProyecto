@@ -17,14 +17,14 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _router: Router) {
-    this.user = new User("","","","","","","","");
+    this.user = new User("","","","","","","","","");
    }
 
   ngOnInit(): void {
   }
 
   registrar(){
-    if(this.user.name===""||this.user.user===""||this.user.name===""||this.user.lastName===""||this.user.password===""||this.user.email===""||this.user.age===""){
+    if(this.user.name===""||this.user.user===""||this.user.name===""||this.user.lastName===""||this.user.password===""||this.user.email===""||this.user.age===""||this.user.picture===""){
       Swal.fire({
         /*position: 'top',*/
         icon: 'warning',

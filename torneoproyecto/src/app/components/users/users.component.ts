@@ -14,8 +14,8 @@ export class UsersComponent implements OnInit {
   public idUsuarioModel: User;
   public idUser: User;
   constructor(public userService: UserService) {
-    this.idUsuarioModel = new User("","","","","","","","");
-    this.idUser = new User("","","","","","","","");
+    this.idUsuarioModel = new User("","","","","","","","","");
+    this.idUser = new User("","","","","","","","","");
    }
 
   ngOnInit(): void {

@@ -7,6 +7,7 @@ export class User{
     public password: String,
     public type: String,
     public email: String,
-    public age: String
+    public age: String,
+    public picture: String
     ){}
 }

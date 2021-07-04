@@ -39,8 +39,21 @@
       </ul>
     </div>
     <div>
-      <img src="https://s3.ap-south-1.amazonaws.com/in.co.erudition/cdn-in-thegracehotels/images/user.svg" style="border-radius:150px;"
-      width="50">
+      <img *ngIf="userService.getIdentidad() == null"
+        src="https://s3.ap-south-1.amazonaws.com/in.co.erudition/cdn-in-thegracehotels/images/user.svg"
+        style="border-radius:150px;"
+        width="50"
+      >
+      <img *ngIf="userService.getIdentidad().picture == null"
+        src="https://s3.ap-south-1.amazonaws.com/in.co.erudition/cdn-in-thegracehotels/images/user.svg"
+        style="border-radius:150px;"
+        width="50"
+      >
+      <img *ngIf="userService.getIdentidad() != null"
+        src="{{identidad.picture}}"
+        style="border-radius:150px;"
+        width="50"
+      >
     </div>
   </div>
 </nav>
@@ -117,7 +130,6 @@
         <input type="text" class="form-control" id="inputFechNa" name="fechaNacimiento"
         #fechaNacimiento="ngModel" [(ngModel)]="identidad.age" disabled>
       </div>
-
     </form>
   </div>
   <div class="offcanvas-footer">
@@ -182,6 +194,11 @@
             <label for="inputEmail" class="form-label">E-Mail:</label>
             <input type="text" class="form-control" id="inputEmail" name="email"
             #email="ngModel" [(ngModel)]="userModel.email">
+          </div>
+          <div class="mb-3">
+            <label for="inputPicture" class="form-label">Imagen de perfil:</label>
+            <input type="text" class="form-control" id="inputPicture" name="picture"
+            #picture="ngModel" [(ngModel)]="userModel.picture">
           </div>
           <!--
           <div class="mb-3">

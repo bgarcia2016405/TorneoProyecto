@@ -8,6 +8,7 @@ exports.createToken = function (user){
     var payload = {
         sub: user._id,
         user: user.user,
+        picture: user.picture,
         type: user.type,
         iat: moment().unix(),
         exp: moment().day(10, 'days').unix()
