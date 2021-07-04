@@ -79,6 +79,7 @@ function createUser(req,res){
                 UserModel.name = params.name;
                 UserModel.age = params.age;
                 UserModel.email = params.email;
+                UserModel.picture = params.picture;
                 UserModel.type = user;
                 
                 bcrypt.hash(params.password, null, null, (err, encryptedPassword)=>{
