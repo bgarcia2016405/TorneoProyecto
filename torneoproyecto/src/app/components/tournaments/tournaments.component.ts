@@ -21,8 +21,8 @@ export class TournamentsComponent implements OnInit {
     private _userService: UserService
   ) {
     this.token = this._userService.getToken();
-    this.tournamentModelCreate = new Tournament('', '', '')
-    this.tournamentModelGetId = new Tournament('', '', '')
+    this.tournamentModelCreate = new Tournament('', '', '', '')
+    this.tournamentModelGetId = new Tournament('', '', '', '')
     this.identidad = this._userService.getIdentidad();
   }
 
@@ -59,6 +59,7 @@ export class TournamentsComponent implements OnInit {
     this._tournamentService.createTournament(this.tournamentModelCreate, this.token).subscribe(
       response=>{
         this.tournamentModelCreate.name = '';
+        this.tournamentModelCreate.picture = '';
         console.log(response);
         this.getTournaments();
       },
@@ -81,6 +82,16 @@ export class TournamentsComponent implements OnInit {
         this.tournamentModelGetId = response.tournamentEdited;
         console.log(this.tournamentModelGetId);
         this.getTournaments();
+      },
+      error =>{
+        console.log(<any>error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Intenta con otro nombre de torneo',
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     )
   }

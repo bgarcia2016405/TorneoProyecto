@@ -13,12 +13,15 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-xs-12 col-sm-4" *ngFor="let found of tournamentModelGet">
+        <div class="col-xs-12 col-sm-4 tarjeta" *ngFor="let found of tournamentModelGet">
             <div class="card mb-3" style="max-width: 21rem;">
                 <div class="card-header tarjetas">
                     <div class="col">
                         {{found.name}}
                     </div>
+                    <div class= "imagen">
+                        <img  src={{found.picture}} class="card-img-top imagex" alt="Logo">
+                    </div>                    
                     <div class="col botones">
                         <button class="btn btn-outline-dark" type="button" [routerLink]="['/teams', found._id]">
                             <i class="bi bi-eye"></i>
@@ -47,14 +50,18 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="inputTitulo" class="form-label">Titulo</label>
+                        <label for="inputTitulo" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="inputName" name="name" #name="ngModel" [(ngModel)]="tournamentModelCreate.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFoto" class="form-label">URL de foto</label>
+                        <input type="foto" class="form-control" id="exampleFoto" name="picture" #picture="ngModel" [(ngModel)]="tournamentModelCreate.picture">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createTournament()">Agregar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="createTournament()">Agregar</button>
             </div>
         </div>
     </div>
@@ -71,14 +78,18 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="inputTitulo" class="form-label">Torneo</label>
+                        <label for="inputTitulo" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="inputName" name="name" #name="ngModel" [(ngModel)]="tournamentModelGetId.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFoto" class="form-label">URL de foto</label>
+                        <input type="foto" class="form-control" id="exampleFoto" name="picture" #picture="ngModel" [(ngModel)]="tournamentModelGetId.picture">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editTournament()">Editar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="editTournament()">Editar</button>
             </div>
         </div>
     </div>
