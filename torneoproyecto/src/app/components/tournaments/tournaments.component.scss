@@ -3,9 +3,18 @@
 }
 
 .tarjetas{
-    display: flex;
+    display: block;
 }
 
 .botones{
     display: flex;
+}
+
+.imagen{
+    margin: 20px;
+    // height: 200px;
+}
+
+.imagex{
+    height: 100%;
 }
