@@ -21,7 +21,7 @@ function createTeam(req, res) {
     teamModel.name = params.name;
     teamModel.picture = params.picture;
     teamModel.gamePlayed = 0;
-    teamModel.wins =0;
+    teamModel.wins = 0;
     teamModel.draws = 0;
     teamModel.loses = 0;
     teamModel.goalsFor = 0;
@@ -31,12 +31,13 @@ function createTeam(req, res) {
 
 
     Team.find({
-        $or: [
+        $and: [
             { name: teamModel.name },
-            { picture: teamModel.picture }
+            { tournament: teamModel.tournament }
         ]
     }).exec((err, teamFound) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion' })
+
 
         if (teamFound && teamFound.length >= 1) {
             return res.status(500).send({ mensaje: 'El equipo ya existe' })
@@ -69,23 +70,31 @@ function createTeam(req, res) {
             })
         }
     })
+
+
+
+
+
+
+
+
 }
 
 function getTeams(req, res) {
     var idTournament = req.params.idTournament;
-    var jornadas=[]
+    var jornadas = []
 
-    Team.find({tournament: idTournament},(err,teamsFound)=>{
+    Team.find({ tournament: idTournament }, (err, teamsFound) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion de los equipos del Torneo' });
         if (!teamsFound) return res.status(500).send({ mensaje: 'Error al obtener los equipos' });
-        
-    for (let index = 0; index < teamsFound.length-1; index++) {
-       jornadas[index] = index + 1 
-        
-    }
-        return res.status(200).send({ teamsFound,jornadas });
-    }).populate('tournament', 'name').sort( { points: -1 } )
-    
+
+        for (let index = 0; index < teamsFound.length - 1; index++) {
+            jornadas[index] = index + 1
+
+        }
+        return res.status(200).send({ teamsFound, jornadas });
+    }).populate('tournament', 'name').sort({ points: -1 })
+
 }
 
 function getTeamId(req, res) {
@@ -94,7 +103,7 @@ function getTeamId(req, res) {
     Team.findById(idTeam).populate('tournament', 'name').exec((err, teamFound) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la peticion del equipo' });
         if (!teamFound) return res.status(500).send({ mensaje: 'Error al obtener el equipo' });
-        return res.status(200).send( {teamFound} );
+        return res.status(200).send({ teamFound });
     })
 
 }
