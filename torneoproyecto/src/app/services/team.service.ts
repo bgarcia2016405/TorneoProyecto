@@ -25,6 +25,14 @@ export class TeamService {
     })
   }
 
+  getTeamName(token, id: String): Observable<any>{
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(this.url + '/getTeamName/' + id,
+    { headers: headersToken,
+    })
+  }
+
   getTeamId(token, id: String): Observable<any> {
     let headersToken = this.headersVariable.set('Authorization', token);
 

@@ -19,6 +19,7 @@ export class MatchComponent implements OnInit {
   public idTournamentRuta: String;
   public teams ;
   public jornada;
+  public team
   constructor(
     private teamService: TeamService,
     private userService: UserService,
@@ -32,20 +33,35 @@ export class MatchComponent implements OnInit {
     this.teams = new Team("","","","",0,0,0,0,0,0,0,0)
 
    }
+   chartOptions = {
+    responsive: true,
+  };
+  chartLabels = [];
+  chartData = [];
+  chartColors = [{
+    backgroundColor: [],
+    borderColor: []
+  }];
+  chartLegend = true;
+  chartPlugins = [];
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((dataRuta) => {
       this.idTournamentRuta = dataRuta.get('idTournament');
+
     });
+
     this.getMatch(this.idTournamentRuta);
     this.getTeams();
+
+
+
   }
 
   getMatch(idTournament){
     this.matchService.getMatches(idTournament).subscribe(
       response => {
         this.matchGet = response
-        console.log(this.matchGet)
       }
     )
   }
@@ -64,6 +80,7 @@ export class MatchComponent implements OnInit {
       response =>{
         this.getMatch(this.idTournamentRuta)
         this.getTeams()
+        this.refresh()
       }
     )
   }
@@ -73,9 +90,20 @@ export class MatchComponent implements OnInit {
       response =>{
         this.teams = response.teamsFound
         this.jornada = response.jornadas
-        console.log(response.jornadas)
+        this.team = this.teams.name
+        this.getTeamname();
       }
     )
+  }
+
+  getTeamname(){
+    console.log(this.teams)
+    this.teams.forEach(element=>{
+      this.chartData.push(element.points)
+      this.chartLabels.push (element.name)
+      this.chartColors[0].backgroundColor.push(`#${Math.floor(Math.random()*16777215).toString(16)}`)
+    })
+
   }
 
   jornadAc(idMatch){

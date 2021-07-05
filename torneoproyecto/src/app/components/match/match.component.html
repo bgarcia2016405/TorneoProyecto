@@ -101,6 +101,21 @@
 
           </tbody>
         </table>
+        <div style="display: block;">
+          <canvas baseChart
+            chartType="doughnut"
+            [data]="chartData"
+            [colors]="chartColors"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend">
+          </canvas>
+        </div>
+
+
       </div>
+
+
+
     </div>
   </div>
