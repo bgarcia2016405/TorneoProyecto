@@ -5,6 +5,8 @@ import { Team } from 'src/app/models/team.model';
 import { MatchService } from 'src/app/services/match.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { jsPDF } from "jspdf";
+
 
 @Component({
   selector: 'app-match',
@@ -71,6 +73,7 @@ export class MatchComponent implements OnInit {
       response => {
         console.log(response)
         this.getMatch( this.idTournamentRuta)
+        this.refresh()
       }
     )
   }
@@ -80,7 +83,6 @@ export class MatchComponent implements OnInit {
       response =>{
         this.getMatch(this.idTournamentRuta)
         this.getTeams()
-        this.refresh()
       }
     )
   }
@@ -91,7 +93,7 @@ export class MatchComponent implements OnInit {
         this.teams = response.teamsFound
         this.jornada = response.jornadas
         this.team = this.teams.name
-        this.getTeamname();
+
       }
     )
   }
@@ -111,6 +113,14 @@ export class MatchComponent implements OnInit {
       response=>{
         console.log(response)
         this.refresh()
+      }
+    )
+  }
+
+  generatePDF(){
+    this.matchService.generatePDF(this.idTournamentRuta).subscribe(
+      response => {
+
       }
     )
   }

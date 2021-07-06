@@ -4,7 +4,126 @@ const jwt = require('../service/jwt');
 const bcrypt = require("bcrypt-nodejs");
 
 const Teams = require('../models/team.model')
-const Match = require('../models/match.model') 
+const Match = require('../models/match.model')
+
+const pdf = require("html-pdf")
+
+
+function pdfReporte(req,res){
+
+    var idTournament = req.params.idTournament;
+    Teams.find({tournament: idTournament},(err,teamsFound)=>{
+        Match.find({tournament:idTournament},(err,matchFound)=>{
+        if (err) return res.status(500).send({ mensaje: 'Error en la peticion de los equipos del Torneo' });
+        if (!teamsFound) return res.status(500).send({ mensaje: 'Error al obtener los equipos' });
+        
+       const contenido = 
+       `<!doctype html>
+       <html>
+       <head>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script><meta charset="utf-8">
+       </head>
+       <body style="text-align: center;">
+
+       
+       <h1>Torneo ${teamsFound[0].tournament.name}</h1>
+
+       <div class="col" style="width:50%;margin-left:150px">
+           
+       <table class="table table-striped">
+       <thead>
+         <tr>
+           <th scope="col">Equipo</th>
+           <th scope="col">GP</th>
+           <th scope="col">W</th>
+           <th scope="col">D</th>
+           <th scope="col">L</th>
+           <th scope="col">GF</th>
+           <th scope="col">GA</th>
+           <th scope="col">GD</th>
+           <th scope="col">Puntos</th>
+         </tr>
+       </thead>
+       <tbody>
+           <tr> ${teamsFound.map(lista =>`
+           <td><img src="${lista.picture}" style="width:15PX" alt="">  ${lista.name}</td>
+           <td>${lista.gamePlayed}</td>
+           <td>${lista.wins}</td>
+           <td>${lista.draws}</td>
+           <td>${lista.loses}</td>
+           <td>${lista.goalsFor}</td>
+           <td>${lista.goalsAgainst}</td>
+           <td>${lista.goalsDiference}</td>
+           <td>${lista.points}</td>
+         </tr>`).join('').replace(/['"{}']+/g, '')}
+       </tbody>
+     </table>
+        </div>
+
+        <br>
+        <br>
+      
+         <div class="col" style="width:50%;margin-left:150px">
+           
+${matchFound.map(match =>`
+<table style="height:max-content;width:max-content">
+       <td>
+         <li style="border:0;" class="list-group-item">  ${match.team1.name}</li>
+       </td>
+         <td>
+           <div style="text-align:center">
+         <img style="width:75PX" src=${match.team1.picture}  alt="Logo">
+       </div>
+         </td>
+         <td>
+           <li style="border:0;" class="list-group-item">${match.score1}</li>
+         </td>
+         <td>
+           VS
+         </td>
+         <td>
+           <li style="border:0;" class="list-group-item">${match.score2}</li>
+         </td>
+         <td>
+           <div style="text-align:center">
+         <img style="width:75PX" src=${match.team2.picture}  alt="Logo">
+         </div>
+         </td>
+         <td>
+           <li style="border:0;" class="list-group-item">${match.team2.name}</li>
+         </td>
+         <hr>
+    </table>
+    
+
+
+
+ `).join('').replace(/['"{}']+/g, '')}
+
+
+         </div>
+        
+         
+
+        </body>
+        </html>
+        `
+        pdf.create(contenido).toFile('./src/pdf/Reporte.pdf', function(err,listo){
+            if (err){
+                return  res.status(200).send(err)
+              }else{
+                 return res.status(200).send(listo)
+              } 
+        })
+    
+    }).populate('team1 team2').sort( { jornada: 1 } )
+    }).populate('tournament').sort({ points: -1 })
+}
+
+
+
+
 
 function generateMatch(req,res){
    var idTournament = req.params.idTournament;
@@ -129,5 +248,6 @@ module.exports = {
     generateMatch,
     showMatch,
     simulateMatch,
-    jornada
+    jornada,
+    pdfReporte
 }
