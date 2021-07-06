@@ -1,12 +1,18 @@
-  <div class="container">
+ <div id="content">
+
+
+ <div class="container">
   <div class="row">
       <div class="col">
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-outline-danger agregar" type="button" (click)="createMatch()">
+              <button  class="btn btn-outline-danger agregar" type="button" (click)="createMatch()">
                 <i class="bi bi-plus">Sortear</i>
             </button>
-              <button class="btn btn-outline-primary agregar" type="button" >
-              <i class="bi bi-plus"> Partidos</i>
+              <button *ngIf="chartData != null" class="btn btn-outline-primary agregar" type="button" (click)="getTeamname()">
+              <i class="bi bi-plus"> Grafica</i>
+            </button>
+            <button class="btn btn-outline-primary agregar" type="button" (click)="generatePDF()">
+              <i class="bi bi-plus"> PDF</i>
             </button>
           </div>
       </div>
@@ -101,6 +107,23 @@
 
           </tbody>
         </table>
+        <div style="display: block;">
+          <canvas baseChart
+            chartType="doughnut"
+            [data]="chartData"
+            [colors]="chartColors"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend">
+          </canvas>
+        </div>
+
+
       </div>
+
+
+
     </div>
   </div>
+
+</div>
