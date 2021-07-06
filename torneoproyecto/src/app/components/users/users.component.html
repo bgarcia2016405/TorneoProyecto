@@ -204,6 +204,14 @@
             #fechaNacimiento="ngModel" [(ngModel)]="userModel.age">
           </div>
         -->
+        <hr>
+        <label for="example-date-input" class="col-6 col-form-label"><strong>Tipo de rol:</strong></label>
+        <div class="mb-3">
+          <select  name="type" #type="ngModel"
+            [(ngModel)]="idUsuarioModel.type" class="form-select" aria-label="Default select example">
+            <option  [ngValue]="'Administrador'">Administrador</option>
+          </select>
+      </div>
         </form>
       </div>
       <div class="modal-footer">
