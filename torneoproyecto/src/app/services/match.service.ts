@@ -40,6 +40,12 @@ export class MatchService {
     return this.http.get(this.url + '/jornada/' + idMatch+'/'+jornada, {headers:token})
   }
 
+  generatePDF(idTournament): Observable<any>{
+    let token = this.headers.set('Authorization', this.getToken());
+
+    return this.http.get(this.url + '/pdfGenerate/'+idTournament, {headers:token})
+  }
+
 getToken(){
     var token2 = localStorage.token;
     if(token2 != undefined){

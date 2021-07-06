@@ -97,6 +97,15 @@ function getTeams(req, res) {
 
 }
 
+function getTeamName(req,res){
+    var idTournament = req.params.idTournament;
+    Team.find({tournament: idTournament},(err,teamsFound)=>{
+        if (err) return res.status(500).send({ mensaje: 'Error en la peticion de los equipos del Torneo' });
+        if (!teamsFound) return res.status(500).send({ mensaje: 'Error al obtener los equipos' });
+        return res.status(200).send( teamsFound );
+    })
+}
+
 function getTeamId(req, res) {
     var idTeam = req.params.idTeam;
 
@@ -134,5 +143,6 @@ module.exports = {
     getTeams,
     getTeamId,
     editTeam,
-    deleteTeam
+    deleteTeam,
+    getTeamName
 }

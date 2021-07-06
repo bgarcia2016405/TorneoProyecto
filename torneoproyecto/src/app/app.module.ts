@@ -14,6 +14,8 @@ import { TournamentsComponent } from './components/tournaments/tournaments.compo
 import { TeamsComponent } from './components/teams/teams.component';
 import { MatchComponent } from './components/match/match.component';
 
+import { ChartsModule } from "@rinminase/ng-charts";
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { MatchComponent } from './components/match/match.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
