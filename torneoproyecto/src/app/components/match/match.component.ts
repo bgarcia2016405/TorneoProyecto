@@ -112,7 +112,8 @@ export class MatchComponent implements OnInit {
     this.matchService.jornada(idMatch,this.jornada).subscribe(
       response=>{
         console.log(response)
-        this.refresh()
+        this.getMatch(this.idTournamentRuta);
+        this.getTeams()
       }
     )
   }
